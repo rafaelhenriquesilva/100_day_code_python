@@ -14,15 +14,11 @@ while continue_program:
         continue_program = False
 
 max_value = 0
-
+mapping_better_bid = {}     
 for key in dictionaries_bid:
     if(dictionaries_bid[key] > max_value):
+        mapping_better_bid = {}  
         max_value = dictionaries_bid[key]
-
-mapping_better_bid = {}        
-# Identify user with better bid
-for key in dictionaries_bid:
-    if(dictionaries_bid[key] == max_value):
         mapping_better_bid[key] = dictionaries_bid[key]
         
 for key in mapping_better_bid:
