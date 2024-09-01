@@ -52,7 +52,7 @@ dict_cards_game = {
 
 def choice_cards(times):
     list_cards = []
-    for time in range(0, times):
+    for _ in range(0, times):
         card_key = random.choice(list(dict_cards_game.keys()))
         list_cards.extend([dict_cards_game[card_key]])
         
