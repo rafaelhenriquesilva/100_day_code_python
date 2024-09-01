@@ -56,6 +56,9 @@ def choice_cards(times):
         card_key = random.choice(list(dict_cards_game.keys()))
         list_cards.extend([dict_cards_game[card_key]])
         
+    return list_cards
+
+def define_A_Value(list_cards):
     if (11 in list_cards) and (sum(list_cards) > 21) :
          list_cards.remove(11)
          list_cards.append(1)
@@ -69,6 +72,8 @@ def computer_choices(computer_cards):
     return computer_cards
 
 def define_the_winner(personal_cards, computer_cards):
+        personal_cards = define_A_Value(personal_cards)
+        computer_cards = define_A_Value(computer_cards)
         hand_final_personal = sum(personal_cards)
         hand_final_computer = sum(computer_cards)
         
