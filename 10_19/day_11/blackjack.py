@@ -56,6 +56,10 @@ def choice_cards(times):
         card_key = random.choice(list(dict_cards_game.keys()))
         list_cards.extend([dict_cards_game[card_key]])
         
+    if (11 in list_cards) and (sum(list_cards) > 21) :
+         list_cards.remove(11)
+         list_cards.append(1)
+        
     return list_cards
 
 def computer_choices(computer_cards):
