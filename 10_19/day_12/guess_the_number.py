@@ -3,6 +3,8 @@
 # hard - 5 times
 
 import random
+EASY_LIVES = 10
+HARD_LIVES = 5
 def choice_number():
     number = random.randint(1,100) 
     return number
@@ -20,17 +22,14 @@ def verify_choice(correct_number: int, choice: int):
     return continue_trying
 
 def set_lives():
-    lives = 0
     difficult = ''
     while difficult not in ['easy', 'hard']:
         difficult = input("Choose a difficulty. Type 'easy' or 'hard': ")
         
     if difficult == 'easy':
-        lives = 10
+        return EASY_LIVES
     else: 
-        lives = 5
-        
-    return lives
+        return HARD_LIVES
 
 def loop_alternatives(continue_trying: bool, lives: int, random_number):
     while continue_trying == True and lives > 0:
