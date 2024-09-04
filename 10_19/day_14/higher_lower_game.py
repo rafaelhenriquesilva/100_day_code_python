@@ -1,10 +1,11 @@
 # Create a Higher Lower Game
-
+import random
 import billionaries
+
 TECH_BILLIONAIRES = billionaries.tech_billionaires
 INIT_SCORE = 0
 INIT_GAME_OVER = False
-import random
+
 def choice_billionary(tech_billionaires): 
     tech_billionary_key = random.choice(list(tech_billionaires.keys()))
     return {
@@ -32,9 +33,9 @@ def make_challenge(competitors):
         "B": competitors[1]
     }
     
-    print(f'Compare A: {dict_answer['A']['key']}, {dict_answer['A']['value']['description']}.')
-    print('VS')
-    print(f'Against B:  {dict_answer['B']['key']}, {dict_answer['B']['value']['description']}')
+    print(f'Compare A: {dict_answer['A']['key']}, {dict_answer['A']['value']['description']}.\n')
+    print('VS\n')
+    print(f'Against B:  {dict_answer['B']['key']}, {dict_answer['B']['value']['description']}.\n')
     
     return dict_answer
     
@@ -65,13 +66,13 @@ def higher_lower_game():
 
         richest = ''
         while richest not in ['A', 'B']:
-            richest = input("Who has more followers? Type 'A' or 'B': ")
-            
+            richest = input("Who has more followers? Type 'A' or 'B': ").upper()
+            print('\n')
         if compare_participants(dict_answer=dict_answer, answer=richest):
                 score += 1
-                print(f"You're right! Current score: {score}.") 
+                print(f"You're right! Current score: {score}.\n") 
         else:
-                print(f"Sorry, that's wrong. Final score: {score}")
+                print(f"Sorry, that's wrong. Final score: {score}\n")
                 game_over = True
             
 higher_lower_game()
