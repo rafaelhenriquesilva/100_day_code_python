@@ -66,7 +66,7 @@ def higher_lower_game():
 
         richest = ''
         while richest not in ['A', 'B']:
-            richest = input("Who has more followers? Type 'A' or 'B': ").upper()
+            richest = input("Who has more money? Type 'A' or 'B': ").upper()
             print('\n')
         if compare_participants(dict_answer=dict_answer, answer=richest):
                 score += 1
