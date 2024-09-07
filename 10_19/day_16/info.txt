@@ -1,0 +1,41 @@
+# OOP - Object Orientend Programming 
+
+"""
+    Why I learn it?
+    
+    - Complex projects need organization
+    - Separated classes    
+    - Manitance Big project with many developers
+    
+    - Example:
+        Car: 
+            Many functionalities, separated all the parts 
+            We can reaprovate in many places
+        
+        Restaurant: 
+            Clients, Employes, Menu, Chief, Waiter/Waitress
+            
+        Waiter (OBJECT)
+            Attributtes:
+                is_holding_plate = True
+                tables_responsible = [4,5,6]
+                
+            Methods:
+                def take_order(table, order):
+                    # takes order to chef
+                    
+                def take_payment(amount):
+                    # add money to restaurant
+                    
+- Access Attributes:
+car = new Car()
+car.speed = 30
+car.color = 'red'
+
+- Access Methods:
+car.go()
+car.stop()
+ 
+ 
+ Python packages - Help to developer, many functionalities ready
+"""
