@@ -38,14 +38,20 @@ while game_is_on:
         game_is_on = False
         scoreboard.game_over()
         
+        
+    # Slice is better for this situation
     # Detect colision with TAIL
-    for seg in snake.segments:
-        if seg == snake.head:
-            pass
-        elif(snake.head.distance(seg) < 10):
+    # for seg in snake.segments:
+    #     if seg == snake.head:
+    #         pass
+    #     elif(snake.head.distance(seg) < 10):
+    #         game_is_on = False
+    #         scoreboard.game_over()
+    
+    for seg in snake.segments[1:]:
+        if(snake.head.distance(seg) < 10):
             game_is_on = False
             scoreboard.game_over()
-        
   
         
         
