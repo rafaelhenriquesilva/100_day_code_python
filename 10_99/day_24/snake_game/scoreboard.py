@@ -1,12 +1,13 @@
 from turtle import Turtle
 import json
+from pathlib import Path
 ALIGMENT="CENTER"
 FONT=('Arial', 20, 'normal')
 class Scoreboard(Turtle):
     
     def __init__(self) -> None:
         super().__init__()
-        self.high_score = 0
+        self.file_path = Path(__file__).parent / "data.json" 
         self.read_file()
         self.score = 0
         self.color('white')
@@ -36,7 +37,7 @@ class Scoreboard(Turtle):
         
     def read_file(self):
         try:
-            with open("/code/python-exercises/10_99/day_24/snake_game/data.json", "r") as openfile:
+            with self.file_path.open("r") as openfile:
                 self.json_object = json.load(openfile)
                 self.high_score = self.json_object.get("high_score", 0)  
         except (FileNotFoundError, json.JSONDecodeError):  
@@ -45,7 +46,7 @@ class Scoreboard(Turtle):
             
     def write_file(self):
         data = {"high_score": self.high_score}
-        with open("/code/python-exercises/10_99/day_24/snake_game/data.json", "w") as f:
+        with self.file_path.open("w") as f:
             json.dump(data, f)  
 
     
