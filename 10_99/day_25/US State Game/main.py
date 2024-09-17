@@ -27,21 +27,15 @@ def get_mouse_click_coor(x, y):
 turtle.onscreenclick(get_mouse_click_coor)
 states_csv = data['state']
 
-
-
 answer_state = 'init'
 while answer_state != '':
     # Get one state of user
     answer_state = screen.textinput(title='Guess the State', prompt="What's another state's name?")
     # Search State in file
-    state_found = ''
-    for state in states_csv:
-        if state.lower() == answer_state.lower():
-            state_found = state
+    state_found = [state for state in states_csv if state.lower() == answer_state.lower()]
 
-
-    if(state_found != ''):
-        search_state = data[data.state == state_found]
+    if(len(state_found) > 0):
+        search_state = data[data.state == state_found[0]]
         print(search_state)
         
         state_dict = search_state.to_dict()
