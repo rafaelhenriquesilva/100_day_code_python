@@ -7,11 +7,9 @@ class GeneratePassword:
     letters = list(string.ascii_letters)
     numbers = list(string.digits)
     symbols = ['@', '#', '$', '%', '*', '(', ')']
-
-    print("Welcome to the PyPassword Genrator")
-    nr_letters = 5#int(input('How many letters would you like in your password?\n'))
-    nr_symbols = 5#int(input(f'How many symbols would you like in your password?\n'))
-    nr_numbers = 2#int(input('How many numbers would you like in your password?\n'))
+    nr_letters = random.randint(1,4)
+    nr_symbols = random.randint(1,4)
+    nr_numbers = random.randint(1,4)
 
     password = ''
 

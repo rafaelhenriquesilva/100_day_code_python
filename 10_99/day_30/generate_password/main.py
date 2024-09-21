@@ -41,35 +41,46 @@ def save():
                 "password": password
             }
         }
-        update_file(new_data)
-        clear()
-        messagebox.showinfo(title='Adicionado', message=f'Password to site {website} add!')
+
+        try:
+            update_file(new_data)
+        except FileNotFoundError:
+            save_file(new_data)
+        else:
+            clear()
 
 def clear():
     website_input.delete(0, 'end')
     username_input.delete(0, 'end')
     password_input.delete(0, 'end')
-
+# ---------------------------- MANIPULATE JSON------------------------------- #
 def save_file(new_data):
     file_path = Path(__file__).parent / "password_data.json"
     with open(file_path, "w") as data_file: 
         json.dump(new_data, data_file, indent=4)
 
 def update_file(new_data):
-    file_path = Path(__file__).parent / "password_data.json"
-    with open(file_path, "r") as data_file: 
-        data = json.load(data_file)
-        data.update(new_data)
-
-
+    data = read_file()
+    data.update(new_data)
     save_file(data)
 
 def read_file():
     file_path = Path(__file__).parent / "password_data.json"
     with open(file_path, "r") as data_file: 
         data = json.load(data_file)
-        print(data)
         return data
+# ---------------------------- SEARCH BUTTON ------------------------------- #
+def search():
+    website = website_input.get()
+    data = read_file()
+    try:
+        result = data[website]
+        messagebox.showinfo(title=website, message=f"email:{result['email']}\n password:{result['password']}")
+    except KeyError:
+        messagebox.showerror(title='Not Found', message='Company not found')
+    
+    
+
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title('Password Manager')
@@ -89,6 +100,10 @@ canvas.grid(column=1, row=0)
 website_label = Label(text='Website:', font=FONT)
 website_label.grid(column=0,row=1)
 
+# Search Button
+search_button = Button(text='Search', width=12, command=search)
+search_button.grid(column=2,row=1)
+
 # Focus on Input
 website_input = Entry(width=35)
 website_input.grid(column=1,row=1)
@@ -100,6 +115,7 @@ username_label.grid(column=0,row=2)
 
 username_input = Entry(width=35)
 username_input.grid(column=1,row=2)
+
 # Default Value
 username_input.insert(0, 'rafael@gmail.com')
 
