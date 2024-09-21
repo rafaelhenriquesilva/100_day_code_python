@@ -1,7 +1,7 @@
 # ---------------------- PACKAGES ------------------------
 # pip install pandas 
 from tkinter import *
-#from tkinter import messagebox
+from tkinter import messagebox
 from pathlib import Path
 import pandas
 import random
@@ -14,33 +14,47 @@ CARD_BACK_IMAGE_PATH = './images/card_back.png'
 WRONG_IMAGE_PATH = './images/wrong.png'
 RIGHT_IMAGE_PATH = './images/right.png'
 current_card = {}
+to_learn = {}
 
 # --------------------------- READ FRENCH WORDS ---------------------------
 def read_french_words():
+    global to_learn
     french_words_path = Path(__file__).parent / './data/french_words.csv'
     data = pandas.read_csv(french_words_path)
     # orient records transform in list of dictionaries
     to_learn = data.to_dict(orient='records')
-    return to_learn
+
+read_french_words()
 # --------------------------- UPDATE BACKGROUND IMAGE -----------------------
 def update_canvas_background(image):
     canvas.itemconfig(card_background, image=image)
 
+# --------------------------- FINISH PROGRAM TO LEARN ALL WORD -----------------------
+
+def verify_and_finish_program(to_learn):
+    finish = len(to_learn) == 0
+    if finish:
+        messagebox.showinfo(title='Fantastic', message='GOOD, you studied all the words')
+        window.destroy()
+
+
 # --------------------------- NEXT CARD FUNCTION ---------------------------
 def next_card(is_know: bool = False):
-    global current_card
+    global current_card, to_learn
+    verify_and_finish_program(to_learn)
+
     # USE CARD FRONT IMAGE ON CANVAS
     update_canvas_background(card_front_img)
 
-    to_learn = read_french_words()
     current_card = random.choice(to_learn)
     # item config to change specific item in canvas
     canvas.itemconfig(card_title, text=FRENCH_KEY, fill="black")
     canvas.itemconfig(card_word, text=current_card[FRENCH_KEY], fill="black")
 
     if(is_know):
-        print('I know')
-        print(current_card)
+        to_learn.remove(current_card)
+        
+
 
     fire_flip_card()
     
