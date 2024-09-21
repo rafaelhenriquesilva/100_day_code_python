@@ -27,7 +27,7 @@ def update_canvas_background(image):
     canvas.itemconfig(card_background, image=image)
 
 # --------------------------- NEXT CARD FUNCTION ---------------------------
-def next_card():
+def next_card(is_know: bool = False):
     global current_card
     # USE CARD FRONT IMAGE ON CANVAS
     update_canvas_background(card_front_img)
@@ -37,8 +37,15 @@ def next_card():
     # item config to change specific item in canvas
     canvas.itemconfig(card_title, text=FRENCH_KEY, fill="black")
     canvas.itemconfig(card_word, text=current_card[FRENCH_KEY], fill="black")
+
+    if(is_know):
+        print('I know')
+        print(current_card)
+
     fire_flip_card()
     
+def is_know():
+    next_card(TRUE)
 
 # --------------------------- FLIP CARD FUNCTION ---------------------------
 def flip_card():
@@ -94,9 +101,9 @@ cross_image = PhotoImage(file=wrong_image_path)
 unknow_bottom = Button(image=cross_image, highlightthickness=0, command=next_card)
 unknow_bottom.grid(row=1,column=0)
 
-# Button CHECK with image
-check_image_path =  Path(__file__).parent / RIGHT_IMAGE_PATH
-check_image = PhotoImage(file=check_image_path)
-check_bottom = Button(image=check_image, highlightthickness=0, command=next_card)
-check_bottom.grid(row=1, column=1)
+# Button KNOW with image
+know_image_path =  Path(__file__).parent / RIGHT_IMAGE_PATH
+know_image = PhotoImage(file=know_image_path)
+know_bottom = Button(image=know_image, highlightthickness=0, command=is_know)
+know_bottom.grid(row=1, column=1)
 window.mainloop()
